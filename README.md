@@ -1,0 +1,2 @@
+# multipleAIAPIproject
+複数のAIに対してリクエストを送ることを基本設計としたプロジェクト
