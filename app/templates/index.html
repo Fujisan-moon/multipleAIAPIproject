@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <title>AIapi呼び出し画面</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h1>Gemini AIに質問!</h1>
+    <form method="POST">
+        <input type="text" name="question" placeholder="ここに入力してください", style="width: 300px" required>
+        <button type="submit">送信</button>
+    </form>
+
+    {% if question %}
+      <hr>
+      <h3>あなたの質問:</h3>
+      <p>{{ question }}</p>
+      <h3>AIの回答:</h3>
+      <p style="white-space: pre-wrap;">{{ answer }}</p>
+    {% endif %}
+</body>
+</html>

@@ -1,7 +1,16 @@
 from google import genai
+import os
+from dotenv import load_dotenv
 
-client = genai.Client()
 
-response = client.models.generate_content(model="gemini-3-flash-preview", contents = "最近の金の価格動向について教えて")
+load_dotenv()
 
-print(response.text)
+
+def returnAIresponse(Question):
+    client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+    response = client.models.generate_content(
+        model="gemini-2.5-flash", 
+        contents = Question
+    )
+
+    return response.text

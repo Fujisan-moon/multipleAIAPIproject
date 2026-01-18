@@ -1,16 +1,19 @@
-from flask import Flask
-from google import genai
-from dotenv import load_dotenv
-
-load_dotenv()
+from flask import Flask, render_template, request
+from .gemini import returnAIresponse
 
 app = Flask(__name__)
 
-@app.route('/')
-def returnAIresponse():
-    client = genai.Client()
-    response = client.models.generate_content(model="gemini-3-flash-preview", contents = "最近の金の価格動向について教えて")
-    return response.text
-app
+@app.route('/', methods=["GET", "POST"])
+def index():
+    question = None
+    answer = None
+
+    if request.method == "POST":
+        question = request.form.get("question")
+        if question:
+            answer = returnAIresponse(question)
+
+    return render_template("index.html", question=question, answer=answer)
+
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
